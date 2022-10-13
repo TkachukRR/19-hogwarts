@@ -65,10 +65,10 @@ fetchData()
       }
 
       if (previosTargetValue === e.target.dataset.action) {
-        if (refs.pageTable.classList.contains('hidden')) {
-          refs.pageTable.classList.remove('hidden')
+        if (refs.pageTable.classList.contains("hidden")) {
+          refs.pageTable.classList.remove("hidden");
         }
-        
+
         e.target.classList.remove("active");
         activeData = [];
         activeData = JSON.parse(JSON.stringify(data));
@@ -83,8 +83,8 @@ fetchData()
 
       switch (e.target.dataset.action) {
         case "allStudents":
-          if (refs.pageTable.classList.contains('hidden')) {
-            refs.pageTable.classList.remove('hidden')
+          if (refs.pageTable.classList.contains("hidden")) {
+            refs.pageTable.classList.remove("hidden");
           }
           route = "/students";
           previosTargetValue = e.target.dataset.action;
@@ -100,7 +100,7 @@ fetchData()
           break;
 
         case "favorites":
-          refs.pageTable.classList.add('hidden')
+          refs.pageTable.classList.add("hidden");
           console.log(refs.pageTableHead.style.display);
           route = ``;
           previosTargetValue = e.target.dataset.action;
@@ -120,15 +120,17 @@ fetchData()
               console.log(activeData);
               renderFavorites(activeData);
 
-              refs.mainContainer.querySelector('ul').addEventListener("click", makeSome);
+              refs.mainContainer
+                .querySelector("ul")
+                .addEventListener("click", makeSome);
 
               function makeSome(e) {
                 if (e.target.localName !== "button") {
                   return;
                 }
-                
-                console.log('here')
-                
+
+                console.log("here");
+
                 const heroName = e.target.parentElement.children[1].textContent;
                 console.log(heroName);
 
@@ -159,8 +161,8 @@ fetchData()
           break;
 
         default:
-          if (refs.pageTable.classList.contains('hidden')) {
-            refs.pageTable.classList.remove('hidden')
+          if (refs.pageTable.classList.contains("hidden")) {
+            refs.pageTable.classList.remove("hidden");
           }
           route = `/house/${e.target.dataset.action}`;
           previosTargetValue = e.target.dataset.action;
@@ -173,8 +175,7 @@ fetchData()
             })
             .catch((error) => console.log(error));
       }
-    }
-    );
+    });
 
     refs.pageTableHead.addEventListener("click", (e) => {
       if (e.target.localName !== "button") {
@@ -201,13 +202,13 @@ fetchData()
         e.target.dataset.description = "increment";
       }
 
-      refs.pageTableHead.querySelectorAll('.btn__sort').forEach(e => {
+      refs.pageTableHead.querySelectorAll(".btn__sort").forEach((e) => {
         if (e.dataset.action !== param) {
           e.dataset.description = "noSorted";
           e.textContent = "⇕";
           e.dataset.description = "increment";
         }
-      })
+      });
     });
 
     refs.pageTableBody.addEventListener("click", (e) => {
@@ -473,7 +474,7 @@ function renderModalContext(obj) {
 
   const context = `
     <h2>Person characteristic:</h2>
-    <img src="${imgUrl}" alt="blocks" width="150px">
+    <img src="${imgUrl}" alt="image ${obj.name}" width="150px">
     <h3>Hero: ${obj.name}</h3>
     <p>Actor: ${obj.actor}</p>
     <p>Gender: ${obj.gender}</p>
@@ -493,7 +494,7 @@ function renderFavorites(arr) {
       return `
     <li class="favorites__item">
     <div>
-    <img class="favorites__img" src="${image}" alt="blocks" width="150px"></img>
+    <img class="favorites__img" src="${image}" alt="image ${name}" width="150px"></img>
       </div>
       <h3 class="favorites__name">${name}</h3>
       <button class="btn favorites__btn" data-action="remove-from-localStorage">Remove</button>
@@ -503,10 +504,10 @@ function renderFavorites(arr) {
 
   const cardsListMarkup = `<ul class="favorites__list">${cardsMarkup}</ul>`;
 
-if (refs.favoritesList.length !== 0) {
+  if (refs.favoritesList.length !== 0) {
     refs.favoritesList.innerHTML = "";
     refs.favoritesList.insertAdjacentHTML("beforeend", cardsMarkup);
-    return
+    return;
   }
   refs.mainContainer.insertAdjacentHTML("beforeend", cardsListMarkup);
   refs.favoritesList = document.querySelector(".favorites__list");
