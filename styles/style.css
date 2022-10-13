@@ -9,6 +9,7 @@ ul {
 }
 
 body {
+  position: relative;
   background-image: url(../img/1221680.jpg);
   background-attachment: fixed;
 }
@@ -21,6 +22,72 @@ main .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 10px;
+}
+
+.dragon {
+  position: fixed;
+  top: 0%;
+  left: 20%;
+
+  opacity: 1;
+
+  animation: dragon 5s ease-in-out 0s;
+  z-index: -1;
+}
+
+@keyframes dragon {
+  from {
+    top: 100%;
+    left: 100%;
+  }
+  80% {
+    z-index: 0;
+    opacity: 0.8;
+  }
+  to {
+    z-index: -1;
+    top: 0%;
+    left: 20%;
+    opacity: 0.5;
+  }
+}
+
+@keyframes dragon-index {
+  from {
+  }
+  to {
+  }
+}
+
+.backdrop {
+  position: fixed;
+
+  left: 0;
+  top: 0;
+
+  height: 100vh;
+  width: 100vw;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
+  opacity: 1;
+  transform: scale(1);
+
+  transition: opacity 250ms ease-in-out, transform 250ms ease;
+}
+
+.hidden {
+  display: block;
+  visibility: hidden;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: scale(0);
+
+  pointer-events: painted;
+
+  height: 0;
+  width: 0;
 }
 
 @media screen and (min-width: 640px) {
@@ -161,6 +228,9 @@ main .container {
 }
 
 @media screen and (min-width: 640px) {
+  .buttons__list {
+    padding: 20px;
+  }
   .buttons__item {
     flex-basis: calc((100% - 3 * 20px) / 3);
   }
@@ -208,37 +278,6 @@ button.btn.active {
   background: linear-gradient(rgb(76, 77, 82), rgb(56, 57, 62)) rgb(76, 77, 82);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5) inset,
     0 2px 3px rgba(0, 0, 0, 0.5) inset, 0 1px 1px rgba(255, 255, 255, 0.1);
-}
-
-.backdrop {
-  position: fixed;
-
-  left: 0;
-  top: 0;
-
-  height: 100vh;
-  width: 100vw;
-
-  background-color: rgba(0, 0, 0, 0.6);
-
-  opacity: 1;
-  transform: scale(1);
-
-  transition: opacity 250ms ease-in-out, transform 250ms ease;
-}
-
-.hidden {
-  display: block;
-  visibility: hidden;
-  overflow: hidden;
-
-  opacity: 0;
-  transform: scale(0);
-
-  pointer-events: painted;
-
-  height: 0;
-  width: 0;
 }
 
 /* modal window */
@@ -373,7 +412,7 @@ button.favorites__btn {
   .favorites__list {
     margin: -15px;
   }
-  
+
   .favorites__item {
     margin: 15px;
     flex-basis: calc((640px - 3 * 30px) / 3);
@@ -389,7 +428,7 @@ button.favorites__btn {
   .favorites__list {
     margin: -15px;
   }
-  
+
   .favorites__item {
     margin: 15px;
     flex-basis: calc((1024px - 4 * 30px) / 4);
