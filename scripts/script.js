@@ -19,14 +19,13 @@ const refs = {
   buttonsList: document.querySelector(".buttons__list"),
   pageTableHead: document.querySelector(".main__table_head"),
   pageTableBody: document.querySelector(".main__table_body"),
-  pageTableHeader: document.querySelectorAll("th"),
   backdrop: document.querySelector(".backdrop"),
   modalWindow: document.querySelector(".modal__content"),
   btnModalClose: document.querySelector('[data-action="close-modal"]'),
   btnSaveToLocalStorage: document.querySelector(
     '[data-action="save-to-localStorage"]'
   ),
-  mainComtainer: document.querySelector("main").querySelector(".container"),
+  mainContainer: document.querySelector("main").querySelector(".container"),
   pageTable: document.querySelector(".main__table"),
   favoritesList: "",
 };
@@ -120,13 +119,16 @@ fetchData()
 
               console.log(activeData);
               renderFavorites(activeData);
-              console.log(refs.favoritesList);
 
-              refs.mainComtainer.addEventListener("click", (e) => {
+              refs.mainContainer.querySelector('ul').addEventListener("click", makeSome);
+
+              function makeSome(e) {
                 if (e.target.localName !== "button") {
                   return;
                 }
-
+                
+                console.log('here')
+                
                 const heroName = e.target.parentElement.children[1].textContent;
                 console.log(heroName);
 
@@ -151,7 +153,7 @@ fetchData()
                 });
 
                 renderFavorites(activeData);
-              });
+              }
             })
             .catch((error) => console.log(error));
           break;
@@ -171,7 +173,8 @@ fetchData()
             })
             .catch((error) => console.log(error));
       }
-    });
+    }
+    );
 
     refs.pageTableHead.addEventListener("click", (e) => {
       if (e.target.localName !== "button") {
@@ -197,6 +200,14 @@ fetchData()
         e.target.textContent = "⇕";
         e.target.dataset.description = "increment";
       }
+
+      refs.pageTableHead.querySelectorAll('.btn__sort').forEach(e => {
+        if (e.dataset.action !== param) {
+          e.dataset.description = "noSorted";
+          e.textContent = "⇕";
+          e.dataset.description = "increment";
+        }
+      })
     });
 
     refs.pageTableBody.addEventListener("click", (e) => {
@@ -334,7 +345,6 @@ function setBasicValueToSortButton() {
 
 function renderTableRow(arr, paramKey, paramVal) {
   console.log(arr);
-  console.log(refs.pageTableBody);
 
   refs.pageTableBody.innerHTML = "";
 
@@ -498,6 +508,6 @@ if (refs.favoritesList.length !== 0) {
     refs.favoritesList.insertAdjacentHTML("beforeend", cardsMarkup);
     return
   }
-  refs.mainComtainer.insertAdjacentHTML("beforeend", cardsListMarkup);
+  refs.mainContainer.insertAdjacentHTML("beforeend", cardsListMarkup);
   refs.favoritesList = document.querySelector(".favorites__list");
 }
