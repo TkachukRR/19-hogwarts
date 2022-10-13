@@ -99,8 +99,28 @@ main .container {
 .main__table td:last-child {
   border-radius: 0 8px 8px 0;
 }
-
+@media screen and (min-width: 480px) {
+  .main__table {
+    font-size: 10px;
+  }
+}
 @media screen and (min-width: 640px) {
+  .main__table {
+    font-size: 14px;
+  }
+
+  .main__table th {
+    font-size: 14px;
+  }
+
+  .main__table th button {
+    font-size: 16px;
+  }
+
+  .main__table tbody td {
+    padding: 2px 15px;
+    font-size: 14px;
+  }
 }
 @media screen and (min-width: 1024px) {
   .main__table {
@@ -124,7 +144,6 @@ main .container {
   }
   .main__table tbody td {
     padding: 2px 15px;
-    font-size: 14px;
   }
 }
 /* buttons  list */
