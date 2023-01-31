@@ -32,7 +32,6 @@ const refs = {
 
 fetchData()
   .then((data) => {
-    // console.log(data)
     const arrayAllFilterValues = getArrayOfValues(data, FILTERING_KEY);
     const arrayUniqueFilterValues = getArrayUniqueEl(arrayAllFilterValues);
     const arrayButtons = addEllementsFromArrayToSecondPossitionInArray(
@@ -49,8 +48,6 @@ fetchData()
     addSortToButton("Date of birth");
     addSortToButton("House");
     renderTableRow(activeData);
-
-    // console.log(data)
 
     refs.buttonsList.addEventListener("click", (e) => {
       setBasicValueToSortButton();
@@ -93,31 +90,25 @@ fetchData()
             .then((data) => {
               activeData = [];
               activeData = JSON.parse(JSON.stringify(data));
-              // console.log(activeData)
               renderTableRow(data);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => Error(error));
           break;
 
         case "favorites":
           refs.pageTable.classList.add("hidden");
-          console.log(refs.pageTableHead.style.display);
           route = ``;
           previosTargetValue = e.target.dataset.action;
           e.target.classList.add("active");
           fetchDataByButton(route)
             .then((data) => {
               activeData = [];
-              console.log(activeData);
-              console.log(data);
-
               activeData = JSON.parse(JSON.stringify(data)).filter((e) => {
                 if (localStorageNamesArray.includes(e.name)) {
                   return e;
                 }
               });
 
-              console.log(activeData);
               renderFavorites(activeData);
 
               refs.mainContainer
@@ -129,18 +120,13 @@ fetchData()
                   return;
                 }
 
-                console.log("here");
-
                 const heroName = e.target.parentElement.children[1].textContent;
-                console.log(heroName);
 
                 if (localStorageNamesArray.indexOf(heroName) !== -1) {
-                  console.log(localStorageNamesArray);
                   localStorageNamesArray.splice(
                     localStorageNamesArray.indexOf(heroName),
                     1
                   );
-                  console.log(localStorageNamesArray);
                 }
 
                 localStorage.setItem(
@@ -157,7 +143,7 @@ fetchData()
                 renderFavorites(activeData);
               }
             })
-            .catch((error) => console.log(error));
+            .catch((error) => Error(error));
           break;
 
         default:
@@ -173,7 +159,7 @@ fetchData()
               activeData = JSON.parse(JSON.stringify(data));
               renderTableRow(data);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => Error(error));
       }
     });
 
@@ -212,11 +198,9 @@ fetchData()
     });
 
     refs.pageTableBody.addEventListener("click", (e) => {
-      const personName = e.path[1].querySelector("td").textContent;
-      console.log(personName);
+      const personName = e.target.textContent;
       activeData.filter((elem) => {
         if (elem.name === personName) {
-          console.log(elem);
           renderModalContext(elem);
 
           refs.btnSaveToLocalStorage = document.querySelector(
@@ -247,7 +231,7 @@ fetchData()
       });
     });
   })
-  .catch((error) => console.log(error));
+  .catch((error) => Error(error));
 
 function fetchData() {
   return fetch(`${BASE_URL}/api/characters`).then((response) => {
@@ -345,8 +329,6 @@ function setBasicValueToSortButton() {
 }
 
 function renderTableRow(arr, paramKey, paramVal) {
-  console.log(arr);
-
   refs.pageTableBody.innerHTML = "";
 
   const values = Object.values(TABLE_HEADERS).flatMap((el) => el);
