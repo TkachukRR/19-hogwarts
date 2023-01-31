@@ -1,4 +1,4 @@
-const BASE_URL = "https://hp-api.herokuapp.com";
+const BASE_URL = "https://hp-api.onrender.com";
 const DEFUALT_BUTTONS = ["All students", "Favorites"];
 const FILTERING_KEY = "house";
 const TABLE_HEADERS = {
